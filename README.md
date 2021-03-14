@@ -2,16 +2,15 @@
 
 ## Description
 
-This project contains 3 services. A simple user service (simple-service-user) containing two tables: a user table and an address table. The User to Address table is a `ManyToOne`. Many addresses to a single user. The following is currently supported on the user service:
+This project contains 3 sub projects. A simple user service RESTful (simple-service-user) containing two tables: a user table and an address table. The User to Address table is a `ManyToOne` and is facilitated by Hibernate. The following is currently supported on the user service:
 
 * CreateUser
 * CreateAddress
 * Get User By Email
 * Get User By Country
 
-The CreateUser API has a path variable allowing for an event to be published to a consumer over Kafka. The Simple User consumer project (simple-consumer-user) listens on a `create-user`. The consumer service simply prints the received topic to stdio in a format `UserCreated with ID: n`
-
-The user service leverages a postgres database (simple-db-user) that can initialized with a db passed as an environment variable.
+The CreateUser API has a path variable allowing for an event to be published to a consumer over Kafka. The Simple User consumer project (simple-consumer-user) listens on a `create-user` topic. The consumer service simply prints the received topic to the console in a format `UserCreated with ID: n`
+The user service leverages a postgres database (simple-db-user) that can be initialized with a db passed as an environment variable.
 
 ## Prerequisites
 
