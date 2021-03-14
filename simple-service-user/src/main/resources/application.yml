@@ -1,0 +1,44 @@
+# ===============================
+# = Spring Profiles
+# ===============================
+spring:
+  profiles:
+    active: default
+    locale: en
+  application:
+    name: simple-service-user
+  
+
+# ===============================
+# = Server Ports.
+# ===============================
+server:
+  port: 8700
+
+# ===============================
+# = Actuator.
+# ===============================
+management:
+  health:
+    defaults:
+      enabled: false
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: ALWAYS  
+  server:
+    port: 9000
+
+
+# ===============================
+# Kafka endpoint
+# ===============================
+kafka:
+  bootstrap: kafka:9092
+

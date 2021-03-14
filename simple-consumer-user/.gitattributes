@@ -1,0 +1,16 @@
+#You should run the following on you repo.
+# git config core.eol lf
+# git config core.autocrlf input
+# In case others have not from cloned repos. Set the default behavior
+*.text=auto
+*.sh  eol=lf
+
+# ...Unless the name matches the following overriding patterns
+# Text Files 
+*.txt text
+*.sql text
+*.java text
+
+# Binary
+*.jpg binary
+*.data binary

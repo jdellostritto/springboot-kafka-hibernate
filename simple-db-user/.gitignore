@@ -1,0 +1,10 @@
+*.class
+*.classpath
+*.factorypath
+*.springbeans
+*.project
+/.settings/
+/.apt_generated/
+/logs/
+/target/
+/.vscode/

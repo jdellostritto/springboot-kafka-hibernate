@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  postgres:
+    image: acme.io/postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/db-data:/var/lib/postgresql/data
+    environment:
+      - SAMPLE_DB_USER=sampleuser
+      - SAMPLE_DB_PASSWORD=samplepass
+      - SAMPLE_DB_DATABASE=userdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password

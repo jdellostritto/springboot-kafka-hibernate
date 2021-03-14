@@ -1,0 +1,14 @@
+# ===============================
+# = Locale UI.
+# ===============================
+swagger:
+  info:
+    version: "0.0.1-SNAPSHOT"
+    title: "simple-service-user"
+    description: "The Simple User Service API Definition"
+    termsOfServiceUrl: "http://www.example.com"
+    license: "Acme proprietary software"
+    licenseUrl: "http://www.example.com"
+    contact-name: "Research and Development"
+    contact-url: "http://www.example.com"
+    contact-email: "information@acme.com"
