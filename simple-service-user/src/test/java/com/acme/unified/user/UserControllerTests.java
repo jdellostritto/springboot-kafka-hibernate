@@ -59,23 +59,6 @@ public class UserControllerTests {
 		.andDo(MockMvcResultHandlers.print()).andReturn();
 		LOGGER.info("MOCK Get User By Email: END");
 
-		jsonInString = mapper.writeValueAsString(a1DTO);
-		LOGGER.info("MOCK Create Address For User: START");
-		mockMvc.perform(post("/api/1.0/user/address/{userid}", 1)
-		.contentType(MediaType.APPLICATION_JSON_VALUE)
-		.content(jsonInString)
-		.accept(MediaType.APPLICATION_JSON_VALUE))
-		.andExpect(status().isCreated())
-		.andDo(MockMvcResultHandlers.print()).andReturn();
-		LOGGER.info("MOCK Create Address FOr User: END");
-		
-		LOGGER.info("MOCK Get User By County: START");
-		mockMvc.perform(get("/api/1.0/user/country/{country}", "country")
-		.contentType(MediaType.APPLICATION_JSON_VALUE)
-		.accept(MediaType.APPLICATION_JSON_VALUE))
-		.andExpect(status().isOk())
-		.andDo(MockMvcResultHandlers.print()).andReturn();
-		LOGGER.info("MOCK Get User By Country: END");
 
 	}
 
@@ -105,6 +88,16 @@ public class UserControllerTests {
 		.andExpect(status().isCreated())
 		.andDo(MockMvcResultHandlers.print()).andReturn();
 		LOGGER.info("MOCK Create User Success: END");
+
+		jsonInString = mapper.writeValueAsString(a1DTO);
+		LOGGER.info("MOCK Create Address For User: START");
+		mockMvc.perform(post("/api/1.0/user/address/{userid}", 1)
+		.contentType(MediaType.APPLICATION_JSON_VALUE)
+		.content(jsonInString)
+		.accept(MediaType.APPLICATION_JSON_VALUE))
+		.andExpect(status().isOk())
+		.andDo(MockMvcResultHandlers.print()).andReturn();
+		LOGGER.info("MOCK Create Address For User: END");
 
 		LOGGER.info("MOCK Get User By County: START");
 		mockMvc.perform(get("/api/1.0/user/country/{country}", "country")

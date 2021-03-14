@@ -1,7 +1,6 @@
 package com.acme.unified.user.dal.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 
 /**
@@ -22,7 +21,7 @@ public class UserBase implements Serializable {
 	protected String lastName;
 	protected String email;
 	protected String password;
-	protected List<Address> addresses;
+	protected Address address;
 
 	public UserBase() {
 		super();
@@ -31,9 +30,9 @@ public class UserBase implements Serializable {
 	/*********************** 
 	 * @return Long
 	 */
-	//public Long getUserId() {
-	//	return userId;
-	//}
+	public Long getUserId() {
+		return userId;
+	}
 	/** 
 	 * @param firstName
 	 */
@@ -44,9 +43,9 @@ public class UserBase implements Serializable {
 	/***********************
 	 * @return String
 	 */
-	//public String getFirstName() {
-	//	return firstName;
-	//}
+	public String getFirstName() {
+		return firstName;
+	}
 	/** 
 	 * @param firstName
 	 */
@@ -57,9 +56,9 @@ public class UserBase implements Serializable {
 	/*********************** 
 	 * @return String
 	 */
-	//public String getLastName() {
-	//	return lastName;
-	//}
+	public String getLastName() {
+		return lastName;
+	}
 	/** 
 	 * @param lastName
 	 */
@@ -70,9 +69,9 @@ public class UserBase implements Serializable {
 	/*********************** 
 	 * @return String
 	 */
-	//public String getEmail() {
-	//	return email;
-	//}
+	public String getEmail() {
+		return email;
+	}
 	/** 
 	 * @param email
 	 */
@@ -90,17 +89,15 @@ public class UserBase implements Serializable {
 	/*********************** 
 	 * @return List<Address>
 	 */
-	//public List<Address> getAdresses() {
-	//	return this.addresses;
-	//}
+	public Address getAddress() {
+		return this.address;
+	}
 	/** 
 	 * @param addresses
 	 */
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
-
-	
 
 
 }

@@ -18,12 +18,12 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class UserIdDTO{
+public class IdDTO{
 
-	private Long userId;
+	private Long Id;
     	
-	public UserIdDTO(@NotNull Long userId) {
-		this.userId = userId;
+	public IdDTO(@NotNull Long Id) {
+		this.Id = Id;
 	}
 
 	public String toString() {

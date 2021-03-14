@@ -1,7 +1,5 @@
 package com.acme.unified.user.dal.service;
 
-import java.util.List;
-
 import com.acme.unified.user.dal.datasource.AddressRepository;
 import com.acme.unified.user.dal.datasource.UserRepository;
 import com.acme.unified.user.dal.model.Address;
@@ -38,7 +36,7 @@ public class AddressRepositoryImpl {
      * @param addressDTO
      * @return User
      */
-    public User createAddress(User user, AddressDTO addressDTO){
+    public Long createAddress(User user, AddressDTO addressDTO){
  
         LOGGER.info("ACME_ADDRESS: createAddress IN: {}", user.toString() );
         
@@ -52,22 +50,10 @@ public class AddressRepositoryImpl {
         _addr.setAddress_1(addressDTO.getAddress_1());
         _addr.setUser(user);
         Address aSaved = aRepo.save(_addr);
+        aRepo.flush();
                 
-        LOGGER.info("ACME_ADDRESS: OUT:\n {}", aSaved.toString() );
-        return uRepo.findByUserId(user.getUserId()).get();               
+        return aSaved.getAddressId();               
     }
-
     
-    /** 
-     * @param country
-     * @return List<User>
-     */
-    public List<User> findByCountry(String country){
-        List<User> l_user =  aRepo.findByCountry(country);
-        uRepo.flush();
-        return l_user;
-           
-    }
-        
     
 }

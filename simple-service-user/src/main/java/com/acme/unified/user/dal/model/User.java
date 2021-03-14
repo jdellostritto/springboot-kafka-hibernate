@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -58,11 +60,11 @@ public class User extends UserBase {
 	public String getPassword() {
 		return password;
 	}
-	@JsonIgnore
+	//@JsonIgnore
 	@JsonManagedReference
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-	public List<Address> getAddresses() {
-		return this.addresses;
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	public Address getAddress() {
+		return this.address;
 	}
 
 	public User() {

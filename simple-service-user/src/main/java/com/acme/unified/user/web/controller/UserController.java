@@ -1,7 +1,6 @@
 package com.acme.unified.user.web.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -10,8 +9,8 @@ import com.acme.unified.user.dal.model.UserBase;
 import com.acme.unified.user.dal.service.AddressRepositoryImpl;
 import com.acme.unified.user.dal.service.UserRepositoryImpl;
 import com.acme.unified.user.web.dto.AddressDTO;
+import com.acme.unified.user.web.dto.IdDTO;
 import com.acme.unified.user.web.dto.UserDTO;
-import com.acme.unified.user.web.dto.UserIdDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,10 +52,10 @@ public class UserController {
 	 */
 	@RequestMapping(method=RequestMethod.POST,value = "/publish/{publish}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public UserIdDTO CreateUser(@PathVariable("publish") boolean publish, @RequestBody @Valid UserDTO userDTO) {
+	public IdDTO CreateUser(@PathVariable("publish") boolean publish, @RequestBody @Valid UserDTO userDTO) {
 				
 		Long userId = uRepoImpl.createUser(userDTO, publish);
-		return new UserIdDTO(userId);
+		return new IdDTO(userId);
 	}
 
 
@@ -65,20 +64,17 @@ public class UserController {
 	 * @return UserBase
 	 */
 	@RequestMapping(method=RequestMethod.POST,value = "/address/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseStatus(HttpStatus.CREATED)
-	public UserBase CreateUserAddress(@PathVariable("userId") Long userId, @RequestBody @Valid AddressDTO addressDTO){
- 
-        LOGGER.info("ACME_USER: createAddress IN: {}", Long.toString(userId) );
-        
-        User _user = uRepoImpl.findUserByUserId(userId);
-		Optional<User> doesExist  = Optional.of(_user);
-		if (doesExist.isEmpty()) {
-			return doesExist.get();
-		}
-		User updateUser = aRepoImpl.createAddress(_user, addressDTO);
-		LOGGER.info("ACME_USER: OUT: {}", updateUser.toString() );
-                    
-		return updateUser;
+	@ResponseStatus(HttpStatus.OK)
+	public IdDTO CreateUserAddress(@PathVariable("userId") Long userId, @RequestBody @Valid AddressDTO addressDTO){
+		Long id;
+		//If not found this will throw a 404
+		User _user = uRepoImpl.findUserByUserId(userId);
+		if(_user.getAddress()== null)
+			id = aRepoImpl.createAddress(_user, addressDTO);
+		else
+			id = _user.getAddress().getAddressId();
+					
+		return new IdDTO(id);
     }
 
 	/** 
@@ -99,7 +95,7 @@ public class UserController {
 	@ResponseStatus(HttpStatus.OK)
 	public List<User> GetUsersByAddressCountry(@PathVariable("country") String country) {
 		//return uRepoImpl.findByCountry(country); 
-		return aRepoImpl.findByCountry(country); 
+		return uRepoImpl.findAllByCountry(country); 
 		
 	}
 	
