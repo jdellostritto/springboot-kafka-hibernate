@@ -4,7 +4,6 @@
      alt="Markdown Monster icon"
      style="float: left; margin-right: 10px;" />
 
-
 ## Description
 
 This project contains 3 sub projects. A simple user service RESTful (simple-service-user) containing two tables: a user table and an address table. The User to Address table is a `OneToOne` mapping and is facilitated by Hibernate. The following is currently supported on the simple user service:
@@ -14,7 +13,7 @@ This project contains 3 sub projects. A simple user service RESTful (simple-serv
 * Get User By Email
 * Get User By Country
 
-The CreateUser API has a boolean path variable. It allows an event to be published to a consumer over Kafka if it is set to true. The Simple User consumer project (simple-consumer-user) listens on a `create-user` topic. The consumer service simply prints the received message from teh topic to the console in a format `UserCreated with ID: n`.
+The CreateUser API has a boolean path variable. It allows an event to be published to a consumer over Kafka if it is set to true. The Simple User consumer project (simple-consumer-user) listens on a `create-user` topic. The consumer service simply prints the received message from the topic to the console in a format `UserCreated with ID: n`.
 
 The user service leverages a postgres database (simple-db-user) that can be initialized with a db passed as an environment variable.
 
@@ -24,7 +23,7 @@ Docker desktop must be installed and a make utility will be required. Each proje
 
 ## Steps to Run
 
-The project can be run by making all three docker images from the project target folders using the `make image` command. A make utility must be installed (see appendix). The `simple-service-user` project contains a compose strategy. It contains a series of compose yaml files that will stand up a complete running environment. From the simple-service-user project execute `make run` from the command line. The following containers will launch (use `docker ps -a` command to ensure you have the three required images built):
+The project can be run by making all three docker images from the project target folders using the `make image` command. A make utility must be installed (see appendix). The `simple-service-user` project contains a compose strategy. It contains a series of compose yaml files that will stand up a complete running environment. From the simple-service-user project execute `make run` from the command line. The following containers will launch (use `docker images` command to ensure you have the three required images built):
 
 * simple-service-user
 * simple-db-user (postgres)
