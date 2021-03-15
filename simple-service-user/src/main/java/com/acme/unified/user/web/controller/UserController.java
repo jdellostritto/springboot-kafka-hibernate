@@ -12,8 +12,6 @@ import com.acme.unified.user.web.dto.AddressDTO;
 import com.acme.unified.user.web.dto.IdDTO;
 import com.acme.unified.user.web.dto.UserDTO;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,8 +36,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/1.0/user")
 public class UserController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-	
 	@Autowired
 	UserRepositoryImpl uRepoImpl;
 	
@@ -58,7 +54,6 @@ public class UserController {
 		return new IdDTO(userId);
 	}
 
-
 	/** 
 	 * @param userDTO
 	 * @return UserBase
@@ -67,7 +62,7 @@ public class UserController {
 	@ResponseStatus(HttpStatus.OK)
 	public IdDTO CreateUserAddress(@PathVariable("userId") Long userId, @RequestBody @Valid AddressDTO addressDTO){
 		Long id;
-		//If not found this will throw a 404
+		//If user is not found this will throw a 404
 		User _user = uRepoImpl.findUserByUserId(userId);
 		if(_user.getAddress()== null)
 			id = aRepoImpl.createAddress(_user, addressDTO);
@@ -93,8 +88,7 @@ public class UserController {
 	 */
 	@GetMapping(value = "/country/{country}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	public List<User> GetUsersByAddressCountry(@PathVariable("country") String country) {
-		//return uRepoImpl.findByCountry(country); 
+	public List<User> GetUsersByAddressCountry(@PathVariable("country") String country) { 
 		return uRepoImpl.findAllByCountry(country); 
 		
 	}

@@ -1,15 +1,21 @@
 # springboot-kafka-hibernate
 
+<img src="https://lucid.app/publicSegments/view/8aed02c1-572c-4c96-b011-5864bf1dc5a7/image.png"
+     alt="Markdown Monster icon"
+     style="float: left; margin-right: 10px;" />
+
+
 ## Description
 
-This project contains 3 sub projects. A simple user service RESTful (simple-service-user) containing two tables: a user table and an address table. The User to Address table is a `ManyToOne` and is facilitated by Hibernate. The following is currently supported on the user service:
+This project contains 3 sub projects. A simple user service RESTful (simple-service-user) containing two tables: a user table and an address table. The User to Address table is a `OneToOne` mapping and is facilitated by Hibernate. The following is currently supported on the simple user service:
 
 * CreateUser
 * CreateAddress
 * Get User By Email
 * Get User By Country
 
-The CreateUser API has a path variable allowing for an event to be published to a consumer over Kafka. The Simple User consumer project (simple-consumer-user) listens on a `create-user` topic. The consumer service simply prints the received topic to the console in a format `UserCreated with ID: n`
+The CreateUser API has a boolean path variable. It allows an event to be published to a consumer over Kafka if it is set to true. The Simple User consumer project (simple-consumer-user) listens on a `create-user` topic. The consumer service simply prints the received message from teh topic to the console in a format `UserCreated with ID: n`.
+
 The user service leverages a postgres database (simple-db-user) that can be initialized with a db passed as an environment variable.
 
 ## Prerequisites
